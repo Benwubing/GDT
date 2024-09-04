@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "3dbe3ee5-35f0-4e95-81d3-81c2dda76e13",
+		"name": "GDT-Financial Assistance Schemes",
+		"description": "**Introduction**  \nThis assignment involves building a backend solution for managing financial assistance schemes for  \nneedy individuals and families. This assessment will focus on the backend logic and design, and  \ndatabase design.\n\n**Objective**  \nThe goal of this assignment is to build a system that  \n● Allows the management of a fictitious set of financial assistance schemes.  \n● Manage accounts of administrators in charge of management of schemes.  \n● Save and update records of applicants who applied for schemes.  \n● The system should advise users of schemes that each applicant can apply for.  \n● The system should also save the outcome of granting of schemes to applicants.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "5783335"
+	},
+	"item": [
+		{
+			"name": "Get Login Token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJson = pm.response.json();",
+							"",
+							"// Extract the desired value from the JSON response",
+							"var valueToSet = responseJson.access; // Adjust 'someField' to the actual field name in your response",
+							"",
+							"// Set the extracted value as a collection variable",
+							"pm.collectionVariables.set(\"token\", valueToSet);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"admin\",\n    \"password\":\"G0vt3chR0x\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/token/",
+				"description": "Sends username and password to get an authorization token"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Applicants",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://127.0.0.1:8000/api/applicants",
+				"description": "Get all applicants in the system"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Applicant",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n\"nric\":\"S1234567E\",\n\"name\": \"Mary\",\n\"employment_status\": \"EMPLOYED\",\n\"gender\": \"FEMALE\",\n\"date_of_birth\": \"1984-10-06\",\n\"household\": [\n{\n\"nric\":\"S7654321E\",\n\"name\": \"GwenZ\",\n\"employment_status\": \"UNEMPLOYED\",\n\"gender\": \"FEMALE\",\n\"date_of_birth\": \"2016-02-01\",\n\"relation\": \"daughter\"\n},\n{\n\"nric\":\"S2134576E\",\n\"name\": \"Jayden\",\n\"employment_status\": \"UNEMPLOYED\",\n\"gender\": \"MALE\",\n\"date_of_birth\": \"2018-03-15\",\n\"relation\": \"son\"\n}\n]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/applicants",
+				"description": "Add Applicants to the system"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Applicant Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n\"nric\":\"S1234567E\",\n\"name\": \"Mary\",\n\"employment_status\": \"EMPLOYED\",\n\"gender\": \"FEMALE\",\n\"date_of_birth\": \"1984-10-06\",\n\"household\": [\n{\n\"nric\":\"S7654321E\",\n\"name\": \"GwenZ\",\n\"employment_status\": \"UNEMPLOYED\",\n\"gender\": \"FEMALE\",\n\"date_of_birth\": \"2016-02-01\",\n\"relation\": \"daughter\"\n},\n{\n\"nric\":\"S2134576E\",\n\"name\": \"Jayden\",\n\"employment_status\": \"UNEMPLOYED\",\n\"gender\": \"MALE\",\n\"date_of_birth\": \"2018-03-15\",\n\"relation\": \"son\"\n}\n]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/applicants",
+				"description": "Add Applicants to the system"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Applicant",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n\"nric\":\"S1234567E\",\n\"name\": \"Jean\",\n\"employment_status\": \"EMPLOYED\",\n\"gender\": \"MALE\",\n\"date_of_birth\": \"1986-10-06\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/applicants/S1234567E/update"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Schemes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://127.0.0.1:8000/api/schemes",
+				"description": "Get all schemes in the system"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Schemes Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://127.0.0.1:8000/api/schemes",
+				"description": "Get all schemes in the system"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Eligible Schemes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/schemes/eligible?applicant=S7777777E",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"schemes",
+						"eligible"
+					],
+					"query": [
+						{
+							"key": "applicant",
+							"value": "S7777777E"
+						}
+					]
+				},
+				"description": "Get all schemes that the applicant is eligible for based on their NRIC"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Applications",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/applications",
+				"description": "Get all applications"
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Application",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n    \"nric\":\"S1234567E\",\n    \"scheme\":\"Retrenchment Assistance Scheme\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8000/api/applications",
+				"description": "Submit an application"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI1NDM1MTI4LCJpYXQiOjE3MjU0MzE1MjgsImp0aSI6IjE3MzU1Zjg4MmNjZjQ1MTJhYTQwMGJiMTZlNDM1NWI4IiwidXNlcl9pZCI6MX0.Esoqshe4J7XQBhGIJBPff_48LzF-t6-_2pobf2-4I_0"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
