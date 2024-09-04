@@ -1,11 +1,11 @@
 # GDT Financial Assistance Scheme System
 
-The goal of this assignment is to build a system that
-● Allows the management of a fictitious set of financial assistance schemes.
-● Manage accounts of administrators in charge of management of schemes.
-● Save and update records of applicants who applied for schemes.
-● The system should advise users of schemes that each applicant can apply for.
-● The system should also save the outcome of granting of schemes to applicants.
+The goal of this assignment is to build a system that**
+● Allows the management of a fictitious set of financial assistance schemes.**
+● Manage accounts of administrators in charge of management of schemes.**
+● Save and update records of applicants who applied for schemes.**
+● The system should advise users of schemes that each applicant can apply for.**
+● The system should also save the outcome of granting of schemes to applicants.**
 
 ## Description
 
@@ -58,8 +58,7 @@ python gdt/manage.py create_admin_user
 python gdt/manage.py runserver
 ```
 
-##Admin Panel
-http://localhost:8000/admin
+[Admin Panel](http://localhost:8000/admin)
 
 ```
 Credentials
@@ -72,9 +71,9 @@ GDT-Financial Assitance Schemes.postman_collection.json
 
 ## Help
 
-###Database explanation:
+### Database explanation:
 
-####Relationships:
+#### Relationships:
 
 - Applicants have a many-to-many relationship with Family Member. Applicants can have 0 to many family members. Family Member table is used to populate the "household" field when retrieving the applicant
 
@@ -91,18 +90,18 @@ so the scheme applies to applicants that are unemployed or widowed
 - SchemeCriteria contains the logic for evaluating the applicant.
 
 ```
--criteria_set: which criteria_set this SchemeCriteria is part of
+criteria_set: which criteria_set this SchemeCriteria is part of
 
--criteria_field: field of interest in the Applicant object
+criteria_field: field of interest in the Applicant object
 
--criteria_field_type: what is the expected type of the value
+criteria_field_type: what is the expected type of the value
 
--criteria_operator: how to evaluate the condition (.e.g. EQUAL,LENGTH_EQUAL,STRING_EQUAL)
+criteria_operator: how to evaluate the condition (.e.g. EQUAL,LENGTH_EQUAL,STRING_EQUAL)
 
--compare_value: the value you compare to
+compare_value: the value you compare to
 ```
 
-For example, in the condition where the applicant needs to be unemployed, the compare_value is "UNEMPLOYED" with the criteria_operator to be STRING_EQUAL
+For example, in the condition where the applicant needs to be unemployed, the compare_value is "UNEMPLOYED" with the criteria_operator to be STRING_EQUAL\_\_
 
 In the event if you use OBJECT as the criteria_field_type, you would have to enter the value for compare_value field in this format
 
@@ -118,8 +117,7 @@ Any advise for common problems or issues. please contact me at benwubing@gmail.c
 
 Contributors names and contact info
 
-ex. Benjamin Wu
-ex. [@Benjamin Wu](https://www.linkedin.com/in/benwubing/)
+[@Benjamin Wu](https://www.linkedin.com/in/benwubing/)
 
 ## Version History
 
